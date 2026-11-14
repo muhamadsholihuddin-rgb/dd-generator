@@ -193,11 +193,11 @@ const LAMPIRAN_BAKU = `Surat Tugas
 Surat Pernyataan Melaksanakan Kegiatan
 Foto/Video Dokumentasi`;
 const DIM = [
- ["ts","Task Skill (TS) — keterampilan menjalankan tugas"],
- ["tms","Task Management Skill (TMS) — keterampilan mengelola tugas"],
- ["cms","Contingency Management Skill (CMS) — keterampilan mengatasi masalah"],
- ["jres","Job/Role Environment Skill (JRES) — pihak yang terlibat & kerja sama"],
- ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru"]
+ ["ts","Task Skill (TS) — keterampilan menjalankan tugas","cth: Melaksanakan kunjungan rumah dan memperbarui data 25 KPM pada aplikasi SIKS-NG sesuai SOP…"],
+ ["tms","Task Management Skill (TMS) — keterampilan mengelola tugas","cth: Menyusun jadwal kunjungan per dusun, membagi sasaran per hari, dan menyelesaikan tepat waktu…"],
+ ["cms","Contingency Management Skill (CMS) — keterampilan mengatasi masalah","cth: Saat ditemukan data ganda, dilakukan verifikasi ulang bersama operator desa hingga data valid…"],
+ ["jres","Job/Role Environment Skill (JRES) — pihak yang terlibat & kerja sama","cth: Berkoordinasi dengan perangkat desa, operator SIKS-NG, dan ketua kelompok KPM…"],
+ ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru","cth: Memanfaatkan fitur pemutakhiran DTSEN dan dokumentasi geotag untuk mempercepat pelaporan…"]
 ];
 function kegBaru(){return {nama:"",tanggal:"",waktu:"",tempat:"",pihak:"",ts:"",tms:"",cms:"",jres:"",trs:"",hasil:"",fotos:[]};}
 let S = {nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
@@ -220,7 +220,7 @@ function renderFormKegiatan(){
       <div><label>Tempat</label><input type="text" value="${esc(k.tempat)}" oninput="setK(${i},'tempat',this.value)"></div>
     </div>
     <label>Pihak-pihak yang Terlibat</label><textarea rows="2" oninput="setK(${i},'pihak',this.value)">${esc(k.pihak)}</textarea>
-    ${DIM.map(([key,lab,ph])=>`<div class="dim"><label>Uraian — ${lab}</label><textarea rows="2" oninput="setK(${i},'${key}',this.value)">${esc(k[key])}</textarea></div>`).join("")}
+    ${DIM.map(([key,lab,ph])=>`<div class="dim"><label>Uraian — ${lab}</label><textarea rows="2" oninput="setK(${i},'${key}',this.value)" placeholder="${ph}">${esc(k[key])}</textarea></div>`).join("")}
     <label>Hasil yang Dicapai</label><textarea rows="2" oninput="setK(${i},'hasil',this.value)">${esc(k.hasil)}</textarea>
     <label>Foto Dokumentasi Kegiatan Ini</label>
     <input type="file" accept="image/*" multiple onchange="unggahFoto(${i},this)">
