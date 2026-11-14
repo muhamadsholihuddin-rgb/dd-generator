@@ -95,12 +95,12 @@ input[type=file]{font-size:12.5px;margin-top:6px}
   .sheet{zoom:1!important;box-shadow:none;margin:0;page-break-after:always}
 }
 </style>
-<style id="page-css">@page{size:A2 portrait;margin:0}</style>
+<style id="page-css">@page{size:A4 portrait;margin:0}</style>
 </head>
 <body>
 <header class="app">
   <h1>DD <span>Generator</span></h1>
-  <p>Generator Laporan Kegiatan Pendamping Sosial — Program Keluarga Harapan (format poster A2 untuk berkas sertifikasi). Semua data diproses &amp; disimpan di perangkat ini, tidak dikirim ke server.</p>
+  <p>Generator Laporan Kegiatan Pendamping Sosial — Program Keluarga Harapan (format A4 untuk berkas sertifikasi). Semua data diproses &amp; disimpan di perangkat ini, tidak dikirim ke server.</p>
   <div class="toolbar">
     <button class="btn-pdf" onclick="unduhPDF()">🖨 Unduh PDF</button>
     <button class="btn-ghost" onclick="muatContoh()">Muat Contoh</button>
@@ -109,13 +109,6 @@ input[type=file]{font-size:12.5px;margin-top:6px}
 </header>
 <main>
 <section class="panel" id="form-panel">
-  <h2>Ukuran Kertas PDF</h2>
-  <select id="f_kertas" onchange="setKertas(this.value)">
-    <option value="A2">A2 — sesuai format contoh (420 × 594 mm)</option>
-    <option value="A3">A3 — lebih kecil (297 × 420 mm)</option>
-    <option value="A4">A4 — kertas biasa (210 × 297 mm)</option>
-  </select>
-  <p class="hint">Isi poster diskalakan otomatis mengikuti ukuran kertas. Untuk hasil persis A2 gunakan Chrome di komputer; di HP pilih ukuran yang tersedia pada dialog cetak.</p>
   <h2>Identitas Laporan</h2>
   <label>Nama Penyusun</label>
   <input type="text" id="f_nama">
@@ -169,7 +162,7 @@ input[type=file]{font-size:12.5px;margin-top:6px}
   <h2>Lampiran</h2>
   <label>Daftar Lampiran (satu baris per item)</label>
   <textarea id="f_lampiran" rows="4"></textarea>
-  <div class="note">💡 Uraian tiap kegiatan dipecah ke 5 dimensi kompetensi (TS, TMS, CMS, JRES, TRS) agar mudah dinilai asesor. Foto otomatis dikompres dan diberi keterangan. PDF yang dihasilkan berukuran A2 — sesuai format contoh.</div>
+  <div class="note">💡 Uraian tiap kegiatan dipecah ke 5 dimensi kompetensi (TS, TMS, CMS, JRES, TRS) agar mudah dinilai asesor. Foto otomatis dikompres dan diberi keterangan. PDF yang dihasilkan berukuran A4.</div>
 </section>
 <section id="preview-wrap"><div id="preview"></div></section>
 </main>
@@ -207,7 +200,7 @@ const DIM = [
  ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru"]
 ];
 function kegBaru(){return {nama:"",tanggal:"",waktu:"",tempat:"",pihak:"",ts:"",tms:"",cms:"",jres:"",trs:"",hasil:"",fotos:[]};}
-let S = {kertas:"A2",nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
+let S = {nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const br = s => esc(s).replace(/\n/g,"<br>");
@@ -337,18 +330,15 @@ function skala(){
   const w=$("preview-wrap");if(!w)return;const avail=w.clientWidth-4;
   document.querySelectorAll(".sheet").forEach(sh=>{sh.style.zoom=Math.min(1,avail/sh.offsetWidth);});
 }
-const PAPERS={A2:[420,594],A3:[297,420],A4:[210,297]};
 function applyKertas(){
-  const [w,h]=PAPERS[S.kertas||"A2"];
-  document.querySelectorAll(".sheet").forEach(sh=>{sh.style.width=w+"mm";sh.style.height=h+"mm";
-    const inn=sh.querySelector(".sheet-inner");if(inn)inn.style.transform="scale("+(w/420)+")";});
-  const pc=document.getElementById("page-css");if(pc)pc.textContent="@page{size:"+w+"mm "+h+"mm;margin:0}";
+  document.querySelectorAll(".sheet").forEach(sh=>{sh.style.width="210mm";sh.style.height="297mm";
+    const inn=sh.querySelector(".sheet-inner");if(inn)inn.style.transform="scale(0.5)";});
+  const pc=document.getElementById("page-css");if(pc)pc.textContent="@page{size:A4 portrait;margin:0}";
   skala();
 }
-function setKertas(v){S.kertas=v;simpan();applyKertas();}
 /* ---------- ikat formulir identitas ---------- */
 const PETA={f_nama:"nama",f_kec:"kec",f_kab:"kab",f_prov:"prov",f_thn1:"thn1",f_thn2:"thn2",f_alamat:"alamat",f_tempat:"tempat",f_tanggal:"tanggal",f_menjab:"menjab",f_mennama:"mennama",f_nip:"nip",f_sk1:"sk1",f_sk2:"sk2",f_sk3:"sk3",f_sk4:"sk4",f_pendahuluan:"pendahuluan",f_hukum:"hukum",f_lampiran:"lampiran"};
-function isiForm(){const ks=document.getElementById("f_kertas");if(ks)ks.value=S.kertas||"A2";for(const[id,k]of Object.entries(PETA)){const el=$(id);if(el)el.value=S[k]??"";}renderFormKegiatan();renderFotoHead();}
+function isiForm(){for(const[id,k]of Object.entries(PETA)){const el=$(id);if(el)el.value=S[k]??"";}renderFormKegiatan();renderFotoHead();}
 function renderFotoHead(){const w=$("fotohead-thumb");w.innerHTML=S.fotohead?`<div class="thumb"><img src="${S.fotohead}" style="width:104px"><button onclick="hapusFotoHead()">Hapus foto</button></div>`:"";}
 function hapusFotoHead(){S.fotohead="";$("f_fotohead").value="";simpan();renderFotoHead();renderPreview();}
 for(const[id,k]of Object.entries(PETA)){document.addEventListener("DOMContentLoaded",()=>{const el=$(id);if(el)el.addEventListener("input",()=>{S[k]=el.value;simpan();renderPreview();});});}
