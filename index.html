@@ -44,6 +44,13 @@ input:focus,textarea:focus{outline:2px solid #9DBFE8;border-color:var(--biru)}
 .thumb button{margin-top:4px;width:100%;padding:4px;font-size:11px;background:#FDEDEC;color:var(--merah)}
 input[type=file]{font-size:12.5px;margin-top:6px}
 .note{font-size:12px;color:var(--abu);line-height:1.5;background:var(--muda);border-radius:8px;padding:9px 11px;margin-top:10px}
+.btn-narasi{background:var(--biru);color:#fff;flex:1;padding:10px}
+.btn-ai{background:#7D3C98;color:#fff;flex:1;padding:10px}
+.btn-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.bahan{background:var(--muda);border-radius:8px;padding:10px 12px;margin-top:10px}
+.bahan b{color:var(--navy);font-size:13px}
+.status-narasi{font-size:12px;color:var(--biru);margin-top:6px;min-height:15px}
+#pesan{display:none;background:#FEF9E7;border:1.5px solid #F39C12;color:#7D6608;border-radius:8px;padding:9px 12px;font-size:13px;margin-top:10px}
 /* ====== HALAMAN A2 ====== */
 #preview-wrap{overflow:hidden}
 .sheet{background:#fff;width:420mm;height:594mm;margin:0 auto 18px;position:relative;padding:0;box-shadow:0 2px 14px rgba(10,42,94,.18);overflow:hidden;transform-origin:top left}
@@ -109,6 +116,11 @@ input[type=file]{font-size:12.5px;margin-top:6px}
 </header>
 <main>
 <section class="panel" id="form-panel">
+  <h2>AI Gemini (opsional — untuk menyusun narasi)</h2>
+  <label>API Key Gemini milik Anda</label>
+  <input type="text" id="f_apikey" autocomplete="off" spellcheck="false">
+  <p class="hint">Kunci <b>tidak ada di dalam kode</b> aplikasi ini. Kunci tersimpan hanya di browser perangkat ini dan dipakai langsung dari perangkat Anda ke Google. Belum punya kunci? Buat gratis di <b>aistudio.google.com/apikey</b> (masuk → Create API key → salin ke sini). Kosongkan bila hanya memakai penyusun narasi lokal.</p>
+  <div id="pesan"></div>
   <h2>Identitas Laporan</h2>
   <label>Nama Penyusun</label>
   <input type="text" id="f_nama">
@@ -199,14 +211,15 @@ const DIM = [
  ["jres","Job/Role Environment Skill (JRES) — pihak yang terlibat & kerja sama","cth: Berkoordinasi dengan perangkat desa, operator SIKS-NG, dan ketua kelompok KPM…"],
  ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru","cth: Memanfaatkan fitur pemutakhiran DTSEN dan dokumentasi geotag untuk mempercepat pelaporan…"]
 ];
-function kegBaru(){return {nama:"",tanggal:"",waktu:"",tempat:"",pihak:"",ts:"",tms:"",cms:"",jres:"",trs:"",hasil:"",fotos:[]};}
+function bahanBaru(){return {inti:"",sasaran:"",rencana:"",hambatan:"",solusi:"",teknologi:""};}
+function kegBaru(){return {nama:"",tanggal:"",waktu:"",tempat:"",pihak:"",bahan:bahanBaru(),ts:"",tms:"",cms:"",jres:"",trs:"",hasil:"",fotos:[]};}
 let S = {nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const br = s => esc(s).replace(/\n/g,"<br>");
 const titik = (s,n=26) => esc(s||"") || "…".padEnd(3,".");
 function simpan(){try{localStorage.setItem("ddgen_v1",JSON.stringify(S));}catch(e){}}
-function muat(){try{const d=localStorage.getItem("ddgen_v1");if(d){S=Object.assign(S,JSON.parse(d));}}catch(e){}}
+function muat(){try{const d=localStorage.getItem("ddgen_v1");if(d){S=Object.assign(S,JSON.parse(d));}}catch(e){} S.kegiatan.forEach(k=>{if(!k.bahan)k.bahan=bahanBaru();});}
 /* ---------- formulir kegiatan ---------- */
 function renderFormKegiatan(){
   const w=$("kegiatan-list");w.innerHTML="";
@@ -220,6 +233,21 @@ function renderFormKegiatan(){
       <div><label>Tempat</label><input type="text" value="${esc(k.tempat)}" oninput="setK(${i},'tempat',this.value)"></div>
     </div>
     <label>Pihak-pihak yang Terlibat</label><textarea rows="2" oninput="setK(${i},'pihak',this.value)">${esc(k.pihak)}</textarea>
+    <div class="bahan"><b>🧩 Bahan Mentah Narasi — isi seadanya, lalu susun otomatis</b>
+      <label>Kegiatan inti yang dilakukan</label><input type="text" value="${esc(k.bahan.inti)}" oninput="setB(${i},'inti',this.value)">
+      <label>Sasaran / objek (siapa, berapa)</label><input type="text" value="${esc(k.bahan.sasaran)}" oninput="setB(${i},'sasaran',this.value)">
+      <label>Perencanaan & pembagian tugas</label><input type="text" value="${esc(k.bahan.rencana)}" oninput="setB(${i},'rencana',this.value)">
+      <div class="grid2">
+        <div><label>Hambatan yang muncul</label><input type="text" value="${esc(k.bahan.hambatan)}" oninput="setB(${i},'hambatan',this.value)"></div>
+        <div><label>Cara mengatasinya</label><input type="text" value="${esc(k.bahan.solusi)}" oninput="setB(${i},'solusi',this.value)"></div>
+      </div>
+      <label>Alat / teknologi yang dipakai</label><input type="text" value="${esc(k.bahan.teknologi)}" oninput="setB(${i},'teknologi',this.value)">
+      <div class="btn-row">
+        <button class="btn-narasi" onclick="susunLokal(${i})">📝 Susun Narasi (Lokal)</button>
+        <button class="btn-ai" onclick="susunAI(${i})">✨ Susun dengan AI Gemini</button>
+      </div>
+      <div class="status-narasi" id="status-narasi-${i}"></div>
+    </div>
     ${DIM.map(([key,lab,ph])=>`<div class="dim"><label>Uraian — ${lab}</label><textarea rows="2" oninput="setK(${i},'${key}',this.value)" placeholder="${ph}">${esc(k[key])}</textarea></div>`).join("")}
     <label>Hasil yang Dicapai</label><textarea rows="2" oninput="setK(${i},'hasil',this.value)">${esc(k.hasil)}</textarea>
     <label>Foto Dokumentasi Kegiatan Ini</label>
@@ -250,6 +278,77 @@ function kompres(file,cb){
 function unggahFoto(i,inp){
   [...inp.files].forEach(f=>kompres(f,src=>{S.kegiatan[i].fotos.push({src,cap:""});simpan();renderThumbs(i);renderPreview();}));
   inp.value="";
+}
+/* ---------- penyusun narasi ---------- */
+function setB(i,k,v){S.kegiatan[i].bahan[k]=v;simpan();}
+function tampilPesan(t){const p=$("pesan");if(p){p.style.display="block";p.textContent=t;}}
+function statusNarasi(i,t){const el=$("status-narasi-"+i);if(el)el.textContent=t;}
+const bersih = s => String(s||"").trim().replace(/\.*\s*$/,"");
+const kecil = s => { s=bersih(s); return s ? s.charAt(0).toLowerCase()+s.slice(1) : s; };
+function pilih(pola,seed){let x=0;const s=String(seed||"");for(let j=0;j<s.length;j++)x=(x*31+s.charCodeAt(j))>>>0;return pola[x%pola.length];}
+function terapkanNarasi(i,n,sumber){
+  ["ts","tms","cms","jres","trs"].forEach(k=>{if(n[k])S.kegiatan[i][k]=n[k];});
+  simpan();renderFormKegiatan();renderPreview();
+  statusNarasi(i,"Narasi tersusun ("+sumber+") — silakan periksa dan sunting bila perlu.");
+}
+function susunLokal(i){
+  const k=S.kegiatan[i],b=k.bahan||bahanBaru();
+  const nama=bersih(k.nama)||"kegiatan pendampingan", tempat=bersih(k.tempat)||"wilayah dampingan",
+        tanggal=bersih(k.tanggal), waktu=bersih(k.waktu),
+        inti=kecil(b.inti)||kecil(nama), sasaran=bersih(b.sasaran)||"Keluarga Penerima Manfaat (KPM)",
+        pihak=bersih(k.pihak)||"perangkat desa dan pihak terkait";
+  const n={};
+  n.ts=pilih([
+    `Melaksanakan ${inti} terhadap ${sasaran} di ${tempat} sesuai standar operasional dan ketentuan Program Keluarga Harapan yang berlaku.`,
+    `${nama} dilaksanakan melalui ${inti} dengan sasaran ${sasaran}, bertempat di ${tempat}, mengikuti prosedur yang ditetapkan.`,
+    `Melakukan ${inti} kepada ${sasaran} di ${tempat} secara tertib, terarah, dan terdokumentasi.`
+  ],inti+tempat);
+  n.tms=(b.rencana?`${bersih(b.rencana)}. `:"")+pilih([
+    `Kegiatan dijadwalkan pada ${tanggal||"hari pelaksanaan"}${waktu?" pukul "+waktu:""} dan dikoordinasikan dengan ${kecil(pihak)} sehingga seluruh tahapan selesai tepat waktu.`,
+    `Pelaksanaan diatur bertahap mulai dari persiapan, pelaksanaan, sampai pencatatan hasil pada ${tanggal||"hari yang sama"}, agar seluruh sasaran terlayani dalam waktu yang tersedia.`,
+    `Waktu dan urutan kerja diatur agar persiapan, pelaksanaan di ${tempat}, dan pelaporan hasil berjalan berurutan tanpa tumpang tindih.`
+  ],tempat+tanggal);
+  n.cms=b.hambatan?`Dalam pelaksanaan ditemukan hambatan: ${kecil(b.hambatan)}. Hambatan tersebut diatasi dengan ${kecil(b.solusi)||"verifikasi dan koordinasi ulang bersama pihak terkait"} sehingga kegiatan tetap berjalan dan tujuan tercapai.`
+    :`Pelaksanaan berjalan sesuai rencana tanpa hambatan yang berarti; setiap temuan di lapangan langsung diverifikasi dan ditindaklanjuti pada saat itu juga.`;
+  n.jres=`Kegiatan dilaksanakan dengan bekerja sama dan berkoordinasi bersama ${kecil(pihak)}, serta mematuhi tata tertib, prosedur, dan harapan yang berlaku di lingkungan kerja.`;
+  n.trs=b.teknologi?`Memanfaatkan ${kecil(b.teknologi)} untuk mendukung pelaksanaan dan pelaporan kegiatan, sehingga data terdokumentasi dengan baik dan mudah ditindaklanjuti.`
+    :`Menggunakan dokumentasi foto dan pencatatan digital untuk mempercepat pelaporan dan memudahkan pemantauan hasil kegiatan.`;
+  terapkanNarasi(i,n,"lokal");
+}
+async function susunAI(i){
+  const key=(localStorage.getItem("ddgen_gemini_key")||"").trim();
+  if(!key){tampilPesan("API Key Gemini belum diisi. Isi dulu pada bagian \u201CAI Gemini\u201D di atas, atau pakai tombol Susun Narasi (Lokal).");window.scrollTo({top:0,behavior:"smooth"});return;}
+  const k=S.kegiatan[i],b=k.bahan||bahanBaru();
+  statusNarasi(i,"Menghubungi Gemini\u2026 tunggu sebentar.");
+  const prompt=`Anda menyusun uraian kegiatan Pendamping Sosial PKH untuk laporan sertifikasi. Berdasarkan data berikut, tuliskan narasi formal Bahasa Indonesia untuk 5 dimensi kompetensi. Masing-masing 2-4 kalimat, gaya laporan resmi, spesifik memakai data yang diberikan, jangan mengarang angka atau nama baru.
+
+DATA:
+Nama kegiatan: ${k.nama||"-"}
+Tanggal: ${k.tanggal||"-"}; Waktu: ${k.waktu||"-"}; Tempat: ${k.tempat||"-"}
+Pihak terlibat: ${k.pihak||"-"}
+Kegiatan inti: ${b.inti||"-"}
+Sasaran: ${b.sasaran||"-"}
+Perencanaan/pembagian tugas: ${b.rencana||"-"}
+Hambatan: ${b.hambatan||"-"}
+Cara mengatasi: ${b.solusi||"-"}
+Alat/teknologi: ${b.teknologi||"-"}
+Hasil yang dicapai: ${k.hasil||"-"}
+
+Kembalikan HANYA objek JSON tanpa markdown: {"ts":"...","tms":"...","cms":"...","jres":"...","trs":"..."}`;
+  try{
+    const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-goog-api-key":key},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{responseMimeType:"application/json",temperature:0.7}})
+    });
+    const data=await r.json();
+    if(!r.ok) throw new Error((data.error&&data.error.message)||("HTTP "+r.status));
+    const teks=data.candidates[0].content.parts.map(p=>p.text||"").join("");
+    const n=JSON.parse(teks);
+    terapkanNarasi(i,n,"AI Gemini");
+  }catch(e){
+    statusNarasi(i,"AI gagal: "+e.message+" — periksa kunci/koneksi, atau gunakan Susun Narasi (Lokal).");
+  }
 }
 /* ---------- pratinjau / halaman ---------- */
 function secHead(num,title){return `<div class="sec-head">${num?`<div class="sec-num">${num}</div>`:""}<div class="sec-title">${title}</div></div>`;}
@@ -342,6 +441,7 @@ function isiForm(){for(const[id,k]of Object.entries(PETA)){const el=$(id);if(el)
 function renderFotoHead(){const w=$("fotohead-thumb");w.innerHTML=S.fotohead?`<div class="thumb"><img src="${S.fotohead}" style="width:104px"><button onclick="hapusFotoHead()">Hapus foto</button></div>`:"";}
 function hapusFotoHead(){S.fotohead="";$("f_fotohead").value="";simpan();renderFotoHead();renderPreview();}
 for(const[id,k]of Object.entries(PETA)){document.addEventListener("DOMContentLoaded",()=>{const el=$(id);if(el)el.addEventListener("input",()=>{S[k]=el.value;simpan();renderPreview();});});}
+(function(){const el=$("f_apikey");if(el){el.value=localStorage.getItem("ddgen_gemini_key")||"";el.addEventListener("input",()=>{localStorage.setItem("ddgen_gemini_key",el.value.trim());});}})();
 $("f_fotohead").addEventListener("change",e=>{const f=e.target.files[0];if(f)kompres(f,src=>{S.fotohead=src;simpan();renderFotoHead();renderPreview();});});
 /* ---------- aksi toolbar ---------- */
 function unduhPDF(){document.title="Laporan Kegiatan Pendamping Sosial PKH — "+(S.nama||"DD Generator");window.print();}
@@ -366,6 +466,8 @@ function muatContoh(){
   k2.jres="Berkoordinasi dengan ketua kelompok dan pihak kelurahan untuk tempat dan peserta, serta mengikuti tata tertib pelaksanaan P2K2.";
   k2.trs="Menggunakan media gambar dan contoh menu keluarga dari bahan lokal agar materi mudah diterapkan peserta di rumah.";
   k2.hasil="28 KPM mengikuti P2K2 hingga selesai; peserta menyusun komitmen praktik pengasuhan dan pemantauan gizi balita di rumah masing-masing.";
+  k1.bahan={inti:"kunjungan rumah (ground check) dan pemutakhiran data anggota KPM pada aplikasi SIKS-NG",sasaran:"25 KPM Kelurahan Cibeunying",rencana:"Menyusun daftar sasaran dan rute kunjungan per lingkungan bersama ketua kelompok",hambatan:"ketidaksesuaian data anggota keluarga pada dua KPM",solusi:"verifikasi ulang dengan dokumen KK dan konfirmasi perangkat kelurahan",teknologi:"aplikasi SIKS-NG dan dokumentasi foto bergeotag"};
+  k2.bahan={inti:"penyelenggaraan Pertemuan Peningkatan Kemampuan Keluarga (P2K2) dengan materi pengasuhan anak dan pencegahan stunting",sasaran:"28 KPM peserta kelompok",rencana:"Menyiapkan materi, daftar hadir, dan membagi peserta ke dalam kelompok diskusi",hambatan:"sebagian peserta terlambat karena hujan",solusi:"membuka sesi dengan rekap materi sebelumnya agar peserta yang terlambat tetap dapat mengikuti",teknologi:"media gambar dan contoh menu keluarga dari bahan lokal"};
   S.kegiatan=[k1,k2];simpan();isiForm();renderPreview();window.scrollTo({top:0,behavior:"smooth"});
 }
 /* ---------- mulai ---------- */
@@ -373,6 +475,9 @@ muat();isiForm();renderPreview();
 if(location.hash.includes("contoh")) muatContoh();
 window.addEventListener("resize",skala);
 /* kait uji otomatis: #testfoto membuat 2 foto contoh dari canvas */
+if(location.hash.includes("ujinarasi")){
+  setTimeout(()=>{S.kegiatan[0].bahan={inti:"kunjungan rumah dan pemutakhiran data KPM",sasaran:"25 KPM Desa Contoh",rencana:"Menyusun rute kunjungan per dusun",hambatan:"data ganda pada dua KPM",solusi:"verifikasi ulang bersama operator desa",teknologi:"aplikasi SIKS-NG dan foto bergeotag"};S.kegiatan[0].tempat="Desa Contoh";susunLokal(0);},500);
+}
 if(location.hash.includes("testfoto")){
   setTimeout(()=>{for(let n=0;n<2;n++){const c=document.createElement("canvas");c.width=800;c.height=560;const x=c.getContext("2d");
     const g=x.createLinearGradient(0,0,800,560);g.addColorStop(0,n?"#F26B1D":"#12407F");g.addColorStop(1,"#0A2A5E");x.fillStyle=g;x.fillRect(0,0,800,560);

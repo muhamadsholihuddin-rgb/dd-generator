@@ -10,6 +10,15 @@ Pengguna mengisi formulir (identitas, dasar hukum/SK, kegiatan, uraian 5 dimensi
 - Semua data diproses dan disimpan **di browser pengguna** (localStorage). Tidak ada data yang dikirim ke server.
 - Logo resmi Kemensos & PKH tertanam di dalam berkas (base64).
 
+## Penyusun Narasi Uraian Kegiatan
+
+Setiap kegiatan punya kotak **Bahan Mentah Narasi** (kegiatan inti, sasaran, perencanaan, hambatan, cara mengatasi, alat/teknologi). Dari bahan itu uraian 5 dimensi kompetensi (TS/TMS/CMS/JRES/TRS) dapat disusun otomatis dengan dua cara:
+
+1. **Susun Narasi (Lokal)** — mesin pola kalimat di dalam aplikasi; gratis, offline, tanpa kunci apa pun.
+2. **Susun dengan AI Gemini** — opsional. Pengguna memasukkan **API Key Gemini miliknya sendiri** pada bagian "AI Gemini". Kunci **tidak ada di dalam kode** aplikasi ini; kunci tersimpan hanya di browser perangkat pengguna dan dipakai langsung dari perangkatnya ke Google. Buat kunci gratis di https://aistudio.google.com/apikey
+
+Hasil susunan (lokal maupun AI) selalu dapat disunting manual sebelum dicetak.
+
 ## Cara Pakai
 
 1. Buka halaman, isi formulir identitas dan kegiatan (bisa ditambah tanpa batas).
