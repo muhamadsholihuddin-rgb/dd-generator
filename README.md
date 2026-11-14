@@ -31,8 +31,10 @@ Hasil susunan (lokal maupun AI) selalu dapat disunting manual sebelum dicetak.
 - **GitHub:** unggah `index.html` dan `README.md` ke repo ini.
 - **Vercel:** Import repo → framework "Other" → tanpa build command, output root. Setiap push ke `main` otomatis terbit (auto-deploy).
 
-## Struktur Halaman PDF
+## Struktur Dokumen PDF (A4 asli)
 
-1. Halaman 1 — kop & identitas, 01 Pendahuluan, 02 Dasar Hukum, daftar kegiatan.
-2. Halaman per kegiatan — 03 Kegiatan yang Dilaksanakan (nama/waktu/tempat, pihak terlibat, uraian 5 dimensi, hasil, dokumentasi).
-3. Halaman terakhir — 04 Penutup & tanda tangan, 05 Lampiran & galeri dokumentasi.
+Tata letak dirancang langsung pada ukuran A4 (huruf isi 12 pt) dan mengalir seperti dokumen biasa — jumlah halaman mengikuti panjang isi:
+
+1. Bagian awal — kop & identitas, 01 Pendahuluan, 02 Dasar Hukum, daftar kegiatan.
+2. Per kegiatan (mulai halaman baru) — 03 Kegiatan yang Dilaksanakan (nama/waktu/tempat, pihak terlibat, uraian 5 dimensi, hasil, dokumentasi).
+3. Bagian akhir (mulai halaman baru) — 04 Penutup & tanda tangan, 05 Lampiran & galeri dokumentasi.
