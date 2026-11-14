@@ -48,34 +48,34 @@ input[type=file]{font-size:12.5px;margin-top:6px}
 #preview-wrap{overflow:hidden}
 .sheet{background:#fff;width:420mm;height:594mm;margin:0 auto 18px;position:relative;padding:0;box-shadow:0 2px 14px rgba(10,42,94,.18);overflow:hidden;transform-origin:top left}
 .sheet-inner{width:420mm;height:594mm;padding:16mm 15mm 20mm;transform-origin:top left;position:relative}
-.sheet .footbar{position:absolute;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;font-weight:700;letter-spacing:4px;font-size:17pt;padding:5mm 0}
+.sheet .footbar{position:absolute;left:0;right:0;bottom:0;background:#fff;color:#000;border-top:2.2pt solid #000;text-align:center;font-weight:700;letter-spacing:4px;font-size:17pt;padding:5mm 0}
 .sheet .footbar small{display:block;letter-spacing:1px;font-weight:400;font-size:9pt;opacity:.75;margin-top:1mm}
-.band-oranye{background:var(--oranye);color:#fff;border-radius:0 0 14mm 0;padding:5mm 8mm;font-weight:800;font-size:25pt;letter-spacing:1px;display:inline-block}
-.sec-head{display:flex;align-items:stretch;border-radius:4mm;overflow:hidden;margin:8mm 0 4mm}
-.sec-num{background:var(--navy);color:#fff;font-weight:800;font-size:20pt;padding:3mm 7mm;display:flex;align-items:center}
-.sec-title{background:var(--oranye);color:#fff;font-weight:800;font-size:19pt;padding:3mm 6mm;flex:1;display:flex;align-items:center;letter-spacing:.5px}
-.sec-body{border:2.2pt solid var(--biru);border-top:0;border-radius:0 0 4mm 4mm;padding:5mm 6mm;font-size:13.5pt;line-height:1.5;text-align:justify;margin-top:-4.2mm}
+.band-oranye{background:#fff;color:#000;border:2.2pt solid #000;padding:4mm 8mm;font-weight:800;font-size:25pt;letter-spacing:1px;display:inline-block}
+.sec-head{display:flex;align-items:stretch;border:2pt solid #000;margin:8mm 0 4mm;background:#fff}
+.sec-num{background:#fff;color:#000;border-right:2pt solid #000;font-weight:800;font-size:20pt;padding:3mm 7mm;display:flex;align-items:center}
+.sec-title{background:#fff;color:#000;font-weight:800;font-size:19pt;padding:3mm 6mm;flex:1;display:flex;align-items:center;letter-spacing:.5px}
+.sec-body{border:2pt solid #000;border-top:0;padding:5mm 6mm;font-size:13.5pt;line-height:1.5;text-align:justify;margin-top:0}
 .sec-body p{margin-bottom:3mm}
 .sec-body ul{margin:2mm 0 3mm 7mm}
 .sec-body li{margin-bottom:1.2mm}
 .kop{display:flex;gap:6mm;align-items:flex-start}
 .kop .logos{display:flex;gap:5mm;align-items:center}
 .kop .logos img{height:30mm}
-.kop .fotohead{margin-left:auto;width:62mm;height:52mm;object-fit:cover;border:2.5pt solid var(--biru);border-radius:3mm}
+.kop .fotohead{margin-left:auto;width:62mm;height:52mm;object-fit:cover;border:1.8pt solid #000}
 .kop .foto-kosong{margin-left:auto;width:62mm;height:52mm;border:2pt dashed var(--garis);border-radius:3mm;display:flex;align-items:center;justify-content:center;color:#8FA6BF;font-size:11pt;text-align:center;padding:4mm}
 .judul-besar{font-size:29pt;font-weight:800;color:#111;line-height:1.18;margin-top:6mm}
 .ident{font-size:15.5pt;margin-top:5mm;line-height:1.65}
 .ident b{font-weight:700}
 .tabel-keg{width:100%;border-collapse:collapse;font-size:13.5pt}
 .tabel-keg td{padding:1.6mm 3mm;vertical-align:top}
-.tabel-keg td:first-child{width:52mm;font-weight:700;color:var(--biru)}
-.blok-judul{font-size:15pt;font-weight:800;color:var(--navy);margin:5mm 0 2mm}
-.blok-judul span{color:var(--oranye)}
+.tabel-keg td:first-child{width:52mm;font-weight:700;color:#000}
+.blok-judul{font-size:15pt;font-weight:800;color:#000;margin:5mm 0 2mm}
+.blok-judul span{color:#000}
 .dimline{margin-bottom:2.6mm;text-align:justify}
-.dimline b{color:var(--merah)}
+.dimline b{color:#000}
 .foto-row{display:flex;gap:5mm;flex-wrap:wrap;margin-top:3mm}
 .foto-item{width:88mm}
-.foto-item img{width:88mm;height:62mm;object-fit:cover;border:1.8pt solid var(--biru);border-radius:2.5mm;display:block}
+.foto-item img{width:88mm;height:62mm;object-fit:cover;border:1.2pt solid #000;display:block}
 .foto-item figcaption{font-size:10.5pt;text-align:center;margin-top:1.5mm;color:#2C3E50}
 .ttd{display:flex;justify-content:space-between;margin-top:10mm;font-size:13.5pt}
 .ttd .kolom{width:42%;text-align:center}
@@ -83,10 +83,10 @@ input[type=file]{font-size:12.5px;margin-top:6px}
 .daftar-keg{font-size:14pt;line-height:1.7}
 .daftar-keg li{margin-left:8mm}
 .galeri{display:flex;flex-wrap:wrap;gap:5mm}
-.kop-mini{display:flex;align-items:center;gap:5mm;border-bottom:2.5pt solid var(--oranye);padding-bottom:4mm}
+.kop-mini{display:flex;align-items:center;gap:5mm;border-bottom:2pt solid #000;padding-bottom:4mm}
 .kop-mini img{height:16mm}
-.kop-mini .km-t{font-weight:800;color:var(--navy);font-size:14pt;line-height:1.3}
-.kop-mini .km-t small{display:block;color:var(--oranye2);font-size:10.5pt;letter-spacing:1.5px}
+.kop-mini .km-t{font-weight:800;color:#000;font-size:14pt;line-height:1.3}
+.kop-mini .km-t small{display:block;color:#000;font-size:10.5pt;letter-spacing:1.5px}
 @media print{
   body{background:#fff}
   header.app,#form-panel,.no-print{display:none!important}
@@ -118,42 +118,42 @@ input[type=file]{font-size:12.5px;margin-top:6px}
   <p class="hint">Isi poster diskalakan otomatis mengikuti ukuran kertas. Untuk hasil persis A2 gunakan Chrome di komputer; di HP pilih ukuran yang tersedia pada dialog cetak.</p>
   <h2>Identitas Laporan</h2>
   <label>Nama Penyusun</label>
-  <input type="text" id="f_nama" placeholder="cth: Muhammad Sholihuddin">
+  <input type="text" id="f_nama">
   <div class="grid2">
-    <div><label>Kecamatan</label><input type="text" id="f_kec" placeholder="cth: Gurah"></div>
-    <div><label>Kabupaten/Kota</label><input type="text" id="f_kab" placeholder="cth: Kediri"></div>
+    <div><label>Kecamatan</label><input type="text" id="f_kec"></div>
+    <div><label>Kabupaten/Kota</label><input type="text" id="f_kab"></div>
   </div>
   <div class="grid3">
-    <div><label>Provinsi</label><input type="text" id="f_prov" placeholder="cth: Jawa Timur"></div>
-    <div><label>Tahun Awal</label><input type="text" id="f_thn1" placeholder="2025"></div>
-    <div><label>Tahun Akhir</label><input type="text" id="f_thn2" placeholder="2026"></div>
+    <div><label>Provinsi</label><input type="text" id="f_prov"></div>
+    <div><label>Tahun Awal</label><input type="text" id="f_thn1"></div>
+    <div><label>Tahun Akhir</label><input type="text" id="f_thn2"></div>
   </div>
   <label>Alamat (untuk kalimat Penutup)</label>
-  <input type="text" id="f_alamat" placeholder="cth: Jl. Raya Gurah No. 1">
+  <input type="text" id="f_alamat">
   <label>Foto Header (pendamping — tampil di pojok kanan atas halaman 1)</label>
   <input type="file" id="f_fotohead" accept="image/*">
   <div class="thumbs" id="fotohead-thumb"></div>
 
   <h2>Tanda Tangan (Penutup)</h2>
   <div class="grid2">
-    <div><label>Tempat Laporan</label><input type="text" id="f_tempat" placeholder="cth: Gurah"></div>
-    <div><label>Tanggal Laporan</label><input type="text" id="f_tanggal" placeholder="cth: 20 November 2026"></div>
+    <div><label>Tempat Laporan</label><input type="text" id="f_tempat"></div>
+    <div><label>Tanggal Laporan</label><input type="text" id="f_tanggal"></div>
   </div>
   <div class="grid2">
-    <div><label>Mengetahui — Jabatan</label><input type="text" id="f_menjab" placeholder="Camat / Ketua Tim"></div>
-    <div><label>Mengetahui — Nama</label><input type="text" id="f_mennama" placeholder="Nama pejabat"></div>
+    <div><label>Mengetahui — Jabatan</label><input type="text" id="f_menjab"></div>
+    <div><label>Mengetahui — Nama</label><input type="text" id="f_mennama"></div>
   </div>
   <label>NIP Pembuat Laporan (opsional)</label>
-  <input type="text" id="f_nip" placeholder="cth: 19820910xxxxxxxxxx">
+  <input type="text" id="f_nip">
 
   <h2>Dasar Hukum — Baris SK Pengangkatan (poin 7)</h2>
   <div class="grid2">
-    <div><label>Instansi Penerbit SK</label><input type="text" id="f_sk1" placeholder="cth: Dinas Sosial Kab. Kediri"></div>
-    <div><label>Nomor SK</label><input type="text" id="f_sk2" placeholder="cth: 188/…/2026"></div>
+    <div><label>Instansi Penerbit SK</label><input type="text" id="f_sk1"></div>
+    <div><label>Nomor SK</label><input type="text" id="f_sk2"></div>
   </div>
   <div class="grid2">
-    <div><label>Tanggal SK</label><input type="text" id="f_sk3" placeholder="cth: 2 Januari 2026"></div>
-    <div><label>Wilayah Kerja pada SK</label><input type="text" id="f_sk4" placeholder="cth: Kecamatan Gurah"></div>
+    <div><label>Tanggal SK</label><input type="text" id="f_sk3"></div>
+    <div><label>Wilayah Kerja pada SK</label><input type="text" id="f_sk4"></div>
   </div>
 
   <h2>Pendahuluan (teks baku — boleh disunting)</h2>
@@ -200,14 +200,14 @@ const LAMPIRAN_BAKU = `Surat Tugas
 Surat Pernyataan Melaksanakan Kegiatan
 Foto/Video Dokumentasi`;
 const DIM = [
- ["ts","Task Skill (TS) — keterampilan menjalankan tugas","cth: Melaksanakan kunjungan rumah dan memperbarui data 25 KPM pada aplikasi SIKS-NG sesuai SOP…"],
- ["tms","Task Management Skill (TMS) — keterampilan mengelola tugas","cth: Menyusun jadwal kunjungan per dusun, membagi sasaran per hari, dan menyelesaikan tepat waktu…"],
- ["cms","Contingency Management Skill (CMS) — keterampilan mengatasi masalah","cth: Saat ditemukan data ganda, dilakukan verifikasi ulang bersama operator desa hingga data valid…"],
- ["jres","Job/Role Environment Skill (JRES) — pihak yang terlibat & kerja sama","cth: Berkoordinasi dengan perangkat desa, operator SIKS-NG, dan ketua kelompok KPM…"],
- ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru","cth: Memanfaatkan fitur pemutakhiran DTSEN dan dokumentasi geotag untuk mempercepat pelaporan…"]
+ ["ts","Task Skill (TS) — keterampilan menjalankan tugas"],
+ ["tms","Task Management Skill (TMS) — keterampilan mengelola tugas"],
+ ["cms","Contingency Management Skill (CMS) — keterampilan mengatasi masalah"],
+ ["jres","Job/Role Environment Skill (JRES) — pihak yang terlibat & kerja sama"],
+ ["trs","Transfer Skill (TRS) — adaptasi keahlian/teknologi baru"]
 ];
 function kegBaru(){return {nama:"",tanggal:"",waktu:"",tempat:"",pihak:"",ts:"",tms:"",cms:"",jres:"",trs:"",hasil:"",fotos:[]};}
-let S = {kertas:"A2",nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"Camat/Ketua Tim",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
+let S = {kertas:"A2",nama:"",kec:"",kab:"",prov:"",thn1:"",thn2:"",alamat:"",tempat:"",tanggal:"",menjab:"",mennama:"",nip:"",sk1:"",sk2:"",sk3:"",sk4:"",pendahuluan:PENDAHULAN_BAKU,hukum:HUKUM_BAKU,lampiran:LAMPIRAN_BAKU,fotohead:"",kegiatan:[kegBaru()]};
 const $ = id => document.getElementById(id);
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const br = s => esc(s).replace(/\n/g,"<br>");
@@ -220,15 +220,15 @@ function renderFormKegiatan(){
   S.kegiatan.forEach((k,i)=>{
     const d=document.createElement("div");d.className="kcard";
     d.innerHTML=`<div class="kcard-head"><b>Kegiatan ${i+1}</b>${S.kegiatan.length>1?`<button class="btn-del" onclick="hapusKegiatan(${i})">Hapus</button>`:""}</div>
-    <label>Nama Kegiatan</label><input type="text" value="${esc(k.nama)}" oninput="setK(${i},'nama',this.value)" placeholder="cth: Melaksanakan Kegiatan Pemutakhiran Data">
+    <label>Nama Kegiatan</label><input type="text" value="${esc(k.nama)}" oninput="setK(${i},'nama',this.value)">
     <div class="grid3">
-      <div><label>Tanggal</label><input type="text" value="${esc(k.tanggal)}" oninput="setK(${i},'tanggal',this.value)" placeholder="10 November 2026"></div>
-      <div><label>Waktu</label><input type="text" value="${esc(k.waktu)}" oninput="setK(${i},'waktu',this.value)" placeholder="08.00–12.00 WIB"></div>
-      <div><label>Tempat</label><input type="text" value="${esc(k.tempat)}" oninput="setK(${i},'tempat',this.value)" placeholder="Kelurahan/Desa …"></div>
+      <div><label>Tanggal</label><input type="text" value="${esc(k.tanggal)}" oninput="setK(${i},'tanggal',this.value)"></div>
+      <div><label>Waktu</label><input type="text" value="${esc(k.waktu)}" oninput="setK(${i},'waktu',this.value)"></div>
+      <div><label>Tempat</label><input type="text" value="${esc(k.tempat)}" oninput="setK(${i},'tempat',this.value)"></div>
     </div>
-    <label>Pihak-pihak yang Terlibat</label><textarea rows="2" oninput="setK(${i},'pihak',this.value)" placeholder="cth: Pendamping Sosial PKH, perangkat desa, operator SIKS-NG, KPM…">${esc(k.pihak)}</textarea>
-    ${DIM.map(([key,lab,ph])=>`<div class="dim"><label>Uraian — ${lab}</label><textarea rows="2" oninput="setK(${i},'${key}',this.value)" placeholder="${ph}">${esc(k[key])}</textarea></div>`).join("")}
-    <label>Hasil yang Dicapai</label><textarea rows="2" oninput="setK(${i},'hasil',this.value)" placeholder="cth: 25 data KPM berhasil diperbarui dan terverifikasi; laporan hasil kegiatan tersusun…">${esc(k.hasil)}</textarea>
+    <label>Pihak-pihak yang Terlibat</label><textarea rows="2" oninput="setK(${i},'pihak',this.value)">${esc(k.pihak)}</textarea>
+    ${DIM.map(([key,lab,ph])=>`<div class="dim"><label>Uraian — ${lab}</label><textarea rows="2" oninput="setK(${i},'${key}',this.value)">${esc(k[key])}</textarea></div>`).join("")}
+    <label>Hasil yang Dicapai</label><textarea rows="2" oninput="setK(${i},'hasil',this.value)">${esc(k.hasil)}</textarea>
     <label>Foto Dokumentasi Kegiatan Ini</label>
     <input type="file" accept="image/*" multiple onchange="unggahFoto(${i},this)">
     <div class="thumbs" id="thumbs-${i}"></div>`;
@@ -239,7 +239,7 @@ function renderThumbs(i){
   const w=$("thumbs-"+i);if(!w)return;w.innerHTML="";
   S.kegiatan[i].fotos.forEach((f,j)=>{
     const t=document.createElement("div");t.className="thumb";
-    t.innerHTML=`<img src="${f.src}"><input type="text" value="${esc(f.cap)}" placeholder="Keterangan foto" oninput="setCap(${i},${j},this.value)"><button onclick="hapusFoto(${i},${j})">Hapus foto</button>`;
+    t.innerHTML=`<img src="${f.src}"><input type="text" value="${esc(f.cap)}" oninput="setCap(${i},${j},this.value)"><button onclick="hapusFoto(${i},${j})">Hapus foto</button>`;
     w.appendChild(t);
   });
 }

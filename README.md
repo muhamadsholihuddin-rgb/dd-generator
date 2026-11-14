@@ -1,6 +1,6 @@
 # DD Generator
 
-Generator **Laporan Kegiatan Pendamping Sosial — Program Keluarga Harapan** (format poster A2) untuk keperluan berkas sertifikasi pendamping sosial PKH.
+Generator **Laporan Kegiatan Pendamping Sosial — Program Keluarga Harapan** (format A2, tata letak baku hitam-putih tanpa warna dekoratif) untuk keperluan berkas sertifikasi pendamping sosial PKH.
 
 Pengguna mengisi formulir (identitas, dasar hukum/SK, kegiatan, uraian 5 dimensi kompetensi TS/TMS/CMS/JRES/TRS, hasil), mengunggah foto dokumentasi, lalu mengunduh hasilnya sebagai **PDF** (ukuran kertas A2/A3/A4).
 
